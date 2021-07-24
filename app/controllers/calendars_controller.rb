@@ -1,9 +1,10 @@
 class CalendarsController < ApplicationController
-  before_action :set_calendar, only: %i[ show edit update destroy ]
+  before_action :set_calendar, only: %i[show edit update destroy]
 
   # GET /calendars or /calendars.json
   def index
     @calendars = Calendar.all
+    @calendar = Calendar.new
   end
 
   # GET /calendars/1 or /calendars/1.json
@@ -25,7 +26,7 @@ class CalendarsController < ApplicationController
 
     respond_to do |format|
       if @calendar.save
-        format.html { redirect_to @calendar, notice: "Calendar was successfully created." }
+        format.html { redirect_to calendars_path, notice: "Calendar was successfully created." }
         format.json { render :show, status: :created, location: @calendar }
       else
         format.html { render :new, status: :unprocessable_entity }

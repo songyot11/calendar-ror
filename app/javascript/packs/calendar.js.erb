@@ -1,0 +1,32 @@
+import { Calendar } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+
+$(document).ready(function () {
+  var events = []
+  <% Calendar.all.each do |calendar| %>
+  events.push({
+    title: '<%=calendar.event_name%>',
+    start: '<%=calendar.start_at&.strftime("%FT%R")%>',
+    end: '<%=calendar.end_at&.strftime("%FT%R")%>',
+    backgroundColor: 'green',
+    borderColor: 'green',
+  })
+  <% end %>
+
+  var calendarEl = document.getElementById('calendar');
+  var calendar = new Calendar(calendarEl, {
+    plugins: [ dayGridPlugin, timeGridPlugin, listPlugin ],
+    initialView: 'listWeek',
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,listWeek'
+    },
+    events: events
+  });
+
+  calendar.setOption('locale', 'th');
+  calendar.render();
+})
