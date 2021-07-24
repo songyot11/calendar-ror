@@ -3,18 +3,15 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 
-$(document).ready(function () {
-  var events = []
-  <% Calendar.all.each do |calendar| %>
-  events.push({
-    title: '<%=calendar.event_name%>',
-    start: '<%=calendar.start_at&.strftime("%FT%R")%>',
-    end: '<%=calendar.end_at&.strftime("%FT%R")%>',
-    backgroundColor: 'green',
-    borderColor: 'green',
-  })
-  <% end %>
 
+document.addEventListener("turbolinks:load", function() {
+  flatpickr("[data-behavior='flatpickr']", {
+    enableTime: true,
+    dateFormat: "d-m-Y H:i"
+  });
+})
+
+window.render_calendar = function(events) {
   var calendarEl = document.getElementById('calendar');
   var calendar = new Calendar(calendarEl, {
     plugins: [ dayGridPlugin, timeGridPlugin, listPlugin ],
@@ -29,4 +26,4 @@ $(document).ready(function () {
 
   calendar.setOption('locale', 'th');
   calendar.render();
-})
+}

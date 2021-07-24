@@ -1,11 +1,13 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Calendars</h1>
-<br>
-<h1>New Calendar</h1>
-
-<%= render 'form', calendar: @calendar %>
 <div class="container">
+  <% if notice.present? %>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <%= notice %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <% end %>
+  <div class="row">
+    <h1 class="text-center">Calendars</h1>
+  </div><br>
   <div class="row">
     <div class="col-sm-8">
       <div class="card">
@@ -17,7 +19,10 @@
     <div class="col-sm-4">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
+          <h5 class="card-title">Special title treatment </h5>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Create event
+          </button>
             <% @calendars.each do |calendar| %>
               <p><%= calendar.event_name %> <%= link_to 'Show', calendar %> <%= link_to 'Edit', edit_calendar_path(calendar) %> <%= link_to 'Destroy', calendar, method: :delete, data: { confirm: 'Are you sure?' } %></p>
             <% end %>
@@ -26,3 +31,34 @@
     </div>
   </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Create event</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render 'form', calendar: @calendar %>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var events = []
+  <% @calendars.each do |calendar| %>
+  events.push({
+    title: '<%=calendar.event_name%>',
+    start: '<%=calendar.start_at&.strftime("%FT%R")%>',
+    end: '<%=calendar.end_at&.strftime("%FT%R")%>',
+    backgroundColor: 'green',
+    borderColor: 'green',
+  })
+  <% end %>
+  render_calendar(events)
+</script>
