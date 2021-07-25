@@ -2,6 +2,9 @@ import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
+import flatpickr from "flatpickr";
+require("flatpickr/dist/flatpickr.css")
+require("flatpickr/dist/themes/dark.css");
 
 
 document.addEventListener("turbolinks:load", function() {
@@ -24,6 +27,6 @@ window.render_calendar = function(events) {
     events: events
   });
 
-  calendar.setOption('locale', 'th');
+  calendar.setOption('locale', 'en');
   calendar.render();
 }

@@ -9,10 +9,9 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
-require("jquery")
-import flatpickr from "flatpickr";
-require("flatpickr/dist/flatpickr.css")
-require("flatpickr/dist/themes/dark.css");
+import "./calendar_custom.css"
+// require("jquery")
+
 
 
 
