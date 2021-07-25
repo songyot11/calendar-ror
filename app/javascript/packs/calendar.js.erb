@@ -18,11 +18,25 @@ window.render_calendar = function(events) {
   var calendarEl = document.getElementById('calendar');
   var calendar = new Calendar(calendarEl, {
     plugins: [ dayGridPlugin, timeGridPlugin, listPlugin ],
-    initialView: 'listWeek',
+    initialView: 'dayGridMonth',
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
-      right: 'dayGridMonth,timeGridWeek,listWeek'
+      right: 'listYear,dayGridMonth,listWeek,listDay'
+    },
+    views: {
+      listYear: {
+        type: 'listYear',
+        buttonText: 'Year'
+      },
+      listWeek: {
+        type: 'listWeek',
+        buttonText: 'Week'
+      },
+      listDay: {
+        type: 'listDay',
+        buttonText: 'Day'
+      }
     },
     events: events
   });
