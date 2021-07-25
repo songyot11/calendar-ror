@@ -1,7 +1,7 @@
 <div class="container">
   <%= form_with(model: calendar) do |form| %>
     <% if calendar.errors.any? %>
-      <div id="error_explanation">
+      <div id="error_explanation" class="text-danger">
         <h2><%= pluralize(calendar.errors.count, "error") %> prohibited this calendar from being saved:</h2>
 
         <ul>
@@ -12,9 +12,12 @@
       </div>
     <% end %>
     <div class="row">
-      <div class="col-md-12" style="margin-bottom: 20px;">
+      <div class="col-md-2 ">
+        <%= form.color_field :tag_color, class: "form-control"%>
+      </div>
+      <div class="col-md-10" style="margin-bottom: 20px;">
         <%= form.text_field :event_name, class: "form-control", placeholder: "Title" %>
-      </div><br>
+      </div>
       <div class="col-md-6" style="margin-bottom: 20px;">
         <%= form.text_field :start_at, data: { behavior: "flatpickr"}, class: "form-control", placeholder: "Start at" %>
       </div>
@@ -22,7 +25,8 @@
         <%= form.text_field :end_at, data: { behavior: "flatpickr"}, class: "form-control", placeholder: "End at" %>
       </div>
     </div>
-    <%= form.submit 'Create', class: "btn btn-primary" %>
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <%= form.submit 'Submit', class: "btn btn-primary" %>
+    <%= link_to 'Back', calendars_path, class: "btn btn-secondary" %>
+
   <% end %>
 </div>

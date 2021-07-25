@@ -6,7 +6,7 @@
   </div>
   <% end %>
   <div class="row">
-    <h1 class="text-center">Calendars</h1>
+    <h1 class="text-center">Calendar</h1>
   </div><br>
   <div class="row">
     <div class="col-sm-8">
@@ -18,14 +18,30 @@
     </div>
     <div class="col-sm-4">
       <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment </h5>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            Create event
-          </button>
-            <% @calendars.each do |calendar| %>
-              <p><%= calendar.event_name %> <%= link_to 'Show', calendar %> <%= link_to 'Edit', edit_calendar_path(calendar) %> <%= link_to 'Destroy', calendar, method: :delete, data: { confirm: 'Are you sure?' } %></p>
-            <% end %>
+        <div class="card-body" style="overflow: scroll; height: 700px;">
+          <div class="row">
+            <div class="col-md-5">
+              <h4 class="card-title ">List all events</h4>
+            </div>
+            <div class="col-md-5" style="margin-bottom: 25px;">
+              <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Create event
+              </button>
+            </div>
+          </div>
+          <% @calendars.each_with_index do |calendar, index| %>
+          <div class="row">
+            <div class="col-md-6">
+               <p><%=index + 1%>) <%= calendar.event_name %> </p>
+            </div><br>
+            <div class="col-md-1" style="width: max-content;">
+              <%= link_to 'Edit', edit_calendar_path(calendar), class: "btn btn-outline-primary" %>
+            </div>
+            <div class="col-md-1">
+              <%= link_to 'Destroy', calendar, class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
+          </div>
+          <% end %>
         </div>
       </div>
     </div>
@@ -56,8 +72,8 @@
     title: '<%=calendar.event_name%>',
     start: '<%=calendar.start_at&.strftime("%FT%R")%>',
     end: '<%=calendar.end_at&.strftime("%FT%R")%>',
-    backgroundColor: 'green',
-    borderColor: 'green',
+    backgroundColor: '<%=calendar.tag_color%>',
+    borderColor: '<%=calendar.tag_color%>',
   })
   <% end %>
   render_calendar(events)
