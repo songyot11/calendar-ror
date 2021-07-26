@@ -7,6 +7,13 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap';
+import "./calendar_custom.css"
+// require("jquery")
+
+
+
 
 Rails.start()
 Turbolinks.start()

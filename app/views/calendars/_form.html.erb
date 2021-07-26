@@ -1,0 +1,32 @@
+<div class="container">
+  <%= form_with(model: calendar) do |form| %>
+    <% if calendar.errors.any? %>
+      <div id="error_explanation" class="text-danger">
+        <h2><%= pluralize(calendar.errors.count, "error") %> prohibited this calendar from being saved:</h2>
+
+        <ul>
+          <% calendar.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="row">
+      <div class="col-md-2 ">
+        <%= form.color_field :tag_color, class: "form-control"%>
+      </div>
+      <div class="col-md-10 m-b20">
+        <%= form.text_field :event_name, class: "form-control", placeholder: "Title" %>
+      </div>
+      <div class="col-md-6 m-b20">
+        <%= form.text_field :start_at, data: { behavior: "flatpickr"}, class: "form-control", placeholder: "Start at" %>
+      </div>
+      <div class="col-md-6">
+        <%= form.text_field :end_at, data: { behavior: "flatpickr"}, class: "form-control", placeholder: "End at" %>
+      </div>
+    </div>
+    <%= form.submit 'Submit', class: "btn btn-primary" %>
+    <%= link_to 'Back', calendars_path, class: "btn btn-secondary" %>
+
+  <% end %>
+</div>
