@@ -20,7 +20,7 @@
       <div class="card">
         <div class="card-body scroll-bar">
           <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-6">
               <h4 class="card-title ">List all events</h4>
             </div>
             <div class="col-md-5 m-b25">
@@ -32,7 +32,7 @@
           <% @calendars.each_with_index do |calendar, index| %>
           <div class="row">
             <div class="col-md-6">
-               <p><%=index + 1%>) <%= calendar.event_name %> </p>
+               <p><b><%=index + 1%>)</b> <%= calendar.event_name %> </p>
             </div><br>
             <div class="col-md-1 max-content">
               <%= link_to 'Edit', edit_calendar_path(calendar), class: "btn btn-outline-primary" %>
